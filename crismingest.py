@@ -4,9 +4,10 @@ def ini(filename):
     dict = {}
     inputini = open(filename,"r")
     for line in inputini:
+        line = line.strip()
         if not ";" in line:
             line = line.split(" = ")
-            dict[line[0]] = line[1][:-1]
+            dict[line[0]] = line[1]
     inputini.close()
     return dict
 
