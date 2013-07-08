@@ -26,4 +26,4 @@ except:
 for item in filecoll:
     file_to_insert = item[0]
     coll_name = item[1]
-    os.system("ps_set_crs.sh " + crsurl + " " + coll_name)
+    os.system("/home/earthserver/ps_set_crs.sh " + crsurl + " " + coll_name)

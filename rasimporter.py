@@ -66,7 +66,7 @@ for item in filecoll:
             sys.exit()
 
     # --- insert image data --
-    command = "rasimport -f %s -t %s -coll %s -conn /home/earthserver/rasconnect" % (file_to_insert, datatype, coll_name)
+    command = "rasimport -f %s -t %s -coll %s -conn /home/earthserver/rasconnect>/dev/null" % (file_to_insert, datatype, coll_name)
     os.system(command)
     while rasql.checkcoll(coll_name, inDs.RasterXSize, inDs.RasterYSize) != 1:
         if rasql.checkcoll(coll_name, inDs.RasterXSize, inDs.RasterYSize) == 2:
