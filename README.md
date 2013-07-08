@@ -3,11 +3,11 @@ rasdaman_ingestion
 
 #### rasdaman.py ####
 Usage:
-'''python
+```python
 from rasdaman import *
 rasql = RasQL()
 psql = PsQL()
-'''
+```
 
 #### rasset.py ####
 rasdaman definitions helper Python script
@@ -18,10 +18,10 @@ rasdaman definitions helper Python script
 
 null=1 only works for rasdaman enterprise
 -make uses GDAL:
-'''python
+```python
 from osgeo import gdal
 from osgeo.gdalconst import *
-'''
+```
 
 #### rasimporter.py ####
 helper Python script for rasimport
@@ -39,9 +39,11 @@ listfile containing lines of 'filename,collname'
 CRSURL like http://kahlua.eecs.jacobs-university.de:8080/def/crs/PS/0/1/
   
 It uses an altered version of: http://www.earthserver.eu/svn/earthserver/src/ps_set_crs.sh
+```
 line 33: add correct rasconnect path
 lines 104-106: comment out
 line 107: add ANS='y'
+```
 
 #### rasdelete.py ####
 rasdaman delete
