@@ -19,14 +19,14 @@ f = open(listfile,"r")
 for line in f:
     line = line.strip().split(",")
     filename = line[0]
-    coll = line[1]
-    meta = str(open(filename[:-4] + ".js","r").readline())
+    collname = line[1]
+    meta = open(os.path.join(os.path.dirname, collname + ".js","r").readline().strip()
     # delete before add
-    psql.do("DELETE FROM ps_metadata WHERE coverage=(SELECT id FROM ps_coverage WHERE name=\x27%s\x27);" % (coll))
+    psql.do("DELETE FROM ps_metadata WHERE coverage=(SELECT id FROM ps_coverage WHERE name=\x27%s\x27);" % (collname))
     # slice up in pieces
     #splitmeta = [meta[i:i+max] for i in range(0, len(meta), max)]
     # insert first piece
-    psql.do("INSERT INTO ps_metadata (coverage, metadata) VALUES ((SELECT id FROM ps_coverage WHERE name=\x27%s\x27), \x27%s\x27);" % (coll, meta)) #splitmeta[0]))
+    psql.do("INSERT INTO ps_metadata (coverage, metadata) VALUES ((SELECT id FROM ps_coverage WHERE name=\x27%s\x27), \x27%s\x27);" % (collname, meta)) #splitmeta[0]))
     # append rest of pieces
     # for string in splitmeta[1:]:
         # psql.do("UPDATE ps_metadata SET metadata = ((SELECT metadata FROM ps_metadata WHERE coverage=(SELECT id FROM ps_coverage WHERE name=\x27%s\x27)) || \x27%s\x27) WHERE coverage=(SELECT id FROM ps_coverage WHERE name=\x27%s\x27);" % (coll,string,coll))

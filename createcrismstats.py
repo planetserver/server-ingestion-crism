@@ -31,6 +31,7 @@ f = open(listfile,"r")
 for line in f:
     line = line.strip().split(",")
     filename = line[0]
+    collname = line[1]
     header = "".join(open(filename + ".hdr", "r").readlines()).replace("\n","")
 
     wavelength = betweenstring(header, "wavelength = {", "}")[0].replace(" ","").split(",")
@@ -55,8 +56,8 @@ for line in f:
         print "XML stats not created!"
         sys.exit()
     
-    print "Writing " + filename[:-4] + ".js"
-    o = open(filename[:-4] + ".js","w")
+    print "Writing " + collname + ".js"
+    o = open(collname + ".js","w")
     out = "{"
     gdallist = ["minimum","maximum","mean","stddev"]
     for item in gdallist:
