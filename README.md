@@ -44,6 +44,13 @@ add CRISM .js JSON metadata to gmlcov:metadata
 addcrismmetadata.py list.txt
 ```
 
+# ingestlist.py
+create inrasdaman.js with all the collection names ingested in rasdaman. This .js is used by the PlanetServer client.
+
+```
+ingestlist inrasdaman.js
+```
+
 # rasdaman.py
 Usage:
 ```python
