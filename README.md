@@ -12,12 +12,13 @@ psql = PsQL()
 #### rasset.py ####
 rasdaman definitions helper Python script
 
-Make Image/Set: rasset.py -make filename setname [null=1]
-Add/Update Image/Set: rasset.py -[add/update] name.def
-Delete Image/Set: rasset.py -del name.def
+* Make Image/Set: rasset.py -make filename setname [null=1]
+* Add/Update Image/Set: rasset.py -[add/update] name.def
+* Delete Image/Set: rasset.py -del name.def
 
-null=1 only works for rasdaman enterprise
--make uses GDAL:
+Misc:
+* null=1 only works for rasdaman enterprise
+* -make uses GDAL:
 ```python
 from osgeo import gdal
 from osgeo.gdalconst import *
@@ -26,9 +27,11 @@ from osgeo.gdalconst import *
 #### rasimporter.py ####
 helper Python script for rasimport
 
-rasimporter.py filename collname
+* rasimporter.py filename collname
+
 OR
-rasimporter.py -l listfile (with listfile containing lines of 'filename,collname')
+
+* rasimporter.py -l listfile (with listfile containing lines of 'filename,collname')
   
 #### rascrs.py ####
 helper Python script for ps_set_crs.sh
@@ -53,11 +56,11 @@ raseraser.py listfile (with listfile containing lines of 'filename,collname')
 #### rassc.py ####
 rasdaman shortcuts
 
-rassc.py -l = List all collections in RASBASE
-rassc.py -i = Initialize WMS layer: <collName> <layerName>
-rassc.py -f = Fill pyramids: <collName>
-rassc.py -d = Drop WMS layer: <layerName>
-rassc.py -u = Update all WMS to new CRS: <Crs>
-rassc.py -c = Compare dataset with collection: <dataset> <collection>
+* rassc.py -l = List all collections in RASBASE
+* rassc.py -i = Initialize WMS layer: <collName> <layerName>
+* rassc.py -f = Fill pyramids: <collName>
+* rassc.py -d = Drop WMS layer: <layerName>
+* rassc.py -u = Update all WMS to new CRS: <Crs>
+* rassc.py -c = Compare dataset with collection: <dataset> <collection>
 
 For petascope WMS see: http://rasdaman.eecs.jacobs-university.de/trac/rasdaman/wiki/WmsImportTools
