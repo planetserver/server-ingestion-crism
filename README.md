@@ -1,10 +1,10 @@
 rasdaman_ingestion
 ==================
 
-#### crismingest.py ####
+# crismingest.py
 Run the ingestion of CRISM data according to the information in crismingest.ini
 
-# crismingest.py [-create]
+#### crismingest.py [-create]
 
 Misc:
 * Use -create if the list (createcrismlist.py) and JSON metadata (createcrismstats.py) have not been created yet.
@@ -13,30 +13,30 @@ Misc:
   * rascrs.py
   * addcrismmetadata.py
 
-#### psproc.txt ####
+# psproc.txt
 This text file is read by createcrismlist.py to determine the collection names of the CRISM data in rasdaman.
 
-#### createcrismlist.py ####
+# createcrismlist.py
 create list of to be ingested CRISM .img data
 
-# createcrismlist.py /path/list.txt
+#### createcrismlist.py /path/list.txt
 
 Misc:
 * 'list.txt' is created in the /path/ which contains .img data.
 * Each line of the listfile is 'filename,collection_name', according to psproc.txt
 
-#### createcrismstats.py ####
+# createcrismstats.py
 
 For each CRISM /path/name.img in list.txt create /path/name.js (JSON) containing metadata.
 
-# createcrismstats.py list.txt
+#### createcrismstats.py list.txt
 
-#### addcrismmetadata.py ####
+# addcrismmetadata.py
 add CRISM .js JSON metadata to gmlcov:metadata
 
-# addcrismmetadata.py list.txt
+#### addcrismmetadata.py list.txt
 
-#### rasdaman.py ####
+# rasdaman.py
 Usage:
 ```python
 from rasdaman import *
@@ -44,12 +44,12 @@ rasql = RasQL()
 psql = PsQL()
 ```
 
-#### rasset.py ####
+# rasset.py
 rasdaman definitions helper Python script
 
-# rasset.py -make filename setname [null=1]
-# rasset.py -[add/update] name.def
-# rasset.py -del name.def
+#### rasset.py -make filename setname [null=1]
+#### rasset.py -[add/update] name.def
+#### rasset.py -del name.def
 
 Misc:
 * null=1 only works for rasdaman enterprise
@@ -60,19 +60,19 @@ from osgeo import gdal
 from osgeo.gdalconst import *
 ```
 
-#### rasimporter.py ####
+# rasimporter.py
 helper Python script for rasimport
 
-# rasimporter.py filename collname
-# rasimporter.py -l listfile
+#### rasimporter.py filename collname
+#### rasimporter.py -l listfile
   
 Misc:
 * listfile containing lines of 'filename,collname'
   
-#### rascrs.py ####
+# rascrs.py
 helper Python script for ps_set_crs.sh
 
-# rascrs.py listfile CRSURL
+#### rascrs.py listfile CRSURL
 
 Misc:
 * listfile containing lines of 'filename,collname'
@@ -85,23 +85,23 @@ lines 104-106: comment out
 line 107: add ANS='y'
 ```
 
-#### raseraser.py ####
+# raseraser.py
 helper Python script for raserase
 
-# raseraser.py listfile
+#### raseraser.py listfile
 
 Misc:
 * listfile containing lines of 'filename,collname'
  
-#### rassc.py ####
+# rassc.py
 rasdaman shortcuts
 
-# rassc.py -l = List all collections in RASBASE
-# rassc.py -i = Initialize WMS layer: <collName> <layerName>
-# rassc.py -f = Fill pyramids: <collName>
-# rassc.py -d = Drop WMS layer: <layerName>
-# rassc.py -u = Update all WMS to new CRS: <Crs>
-# rassc.py -c = Compare dataset with collection: <dataset> <collection>
+#### rassc.py -l = List all collections in RASBASE
+#### rassc.py -i = Initialize WMS layer: <collName> <layerName>
+#### rassc.py -f = Fill pyramids: <collName>
+#### rassc.py -d = Drop WMS layer: <layerName>
+#### rassc.py -u = Update all WMS to new CRS: <Crs>
+#### rassc.py -c = Compare dataset with collection: <dataset> <collection>
 
 Misc:
 * For petascope WMS see: http://rasdaman.eecs.jacobs-university.de/trac/rasdaman/wiki/WmsImportTools
