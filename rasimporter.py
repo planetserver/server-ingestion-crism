@@ -70,6 +70,6 @@ for item in filecoll:
     os.system(command)
     while rasql.checkcoll(coll_name, inDs.RasterXSize, inDs.RasterYSize) != 1:
         if rasql.checkcoll(coll_name, inDs.RasterXSize, inDs.RasterYSize) == 2:
-            os.system("python rasdelete.py " + coll_name)       
+            os.system("raserase -coll " + coll_name)       
         os.system(command)
 
