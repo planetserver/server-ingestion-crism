@@ -12,9 +12,9 @@ psql = PsQL()
 #### rasset.py ####
 rasdaman definitions helper Python script
 
-  Make Image/Set: rasset.py -make filename setname [null=1]
-  Add/Update Image/Set: rasset.py -[add/update] name.def
-  Delete Image/Set: rasset.py -del name.def
+Make Image/Set: rasset.py -make filename setname [null=1]
+Add/Update Image/Set: rasset.py -[add/update] name.def
+Delete Image/Set: rasset.py -del name.def
 
 null=1 only works for rasdaman enterprise
 -make uses GDAL:
@@ -45,10 +45,10 @@ lines 104-106: comment out
 line 107: add ANS='y'
 ```
 
-#### rasdelete.py ####
-rasdaman delete
+#### raseraser.py ####
+helper Python script for raserase
 
-rasdelete.py collection_name
+raseraser.py listfile (with listfile containing lines of 'filename,collname')
 
 #### rassc.py ####
 rasdaman shortcuts
