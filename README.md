@@ -19,6 +19,7 @@ rasdaman definitions helper Python script
 Misc:
 * null=1 only works for rasdaman enterprise
 * -make uses GDAL:
+
 ```python
 from osgeo import gdal
 from osgeo.gdalconst import *
