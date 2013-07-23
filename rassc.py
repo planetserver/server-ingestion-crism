@@ -28,7 +28,21 @@ rasql = RasQL()
 psql = PsQL()
 
 if choice == "-l":
-    print rasql.out("select r from RAS_COLLECTIONNAMES as r")
+    out = rasql.out("select r from RAS_COLLECTIONNAMES as r")
+    colls = []
+    out = out.split('  Result object ')
+    for line in out[1:]:
+        try:
+            line = line.split(':')[1]
+            line = line.split('\n')[0]
+            colls.append(line.strip()[:-1])
+        except:
+            ""
+    for coll in colls:
+        print coll
+        #query = 'select dbinfo(c) from %s in c' % (coll)
+        #size = rasql.out(query)
+        #print size
 if choice == "-i":
     collname = sys.argv[2]
     layername = sys.argv[3]
