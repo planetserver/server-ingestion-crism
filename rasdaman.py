@@ -60,6 +60,21 @@ class RasQL():
                 return 2
         except:
             return 0
+    def inrasdaman(self, coll_name):
+        list = self.out("select r from RAS_COLLECTIONNAMES as r")
+        colls = []
+        list = list.split('  Result object ')
+        for line in list[1:]:
+            try:
+                line = line.split(':')[1]
+                line = line.split('\n')[0]
+                colls.append(line.strip()[:-1])
+            except:
+                ""
+        if coll_name in colls:
+            return 1
+        else:
+            return 0
 
 class PsQL():
     def __init__(self):

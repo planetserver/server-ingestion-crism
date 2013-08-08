@@ -38,8 +38,7 @@ else:
 for item in filecoll:
     file_to_insert = item[0]
     coll_name = item[1]
-    print "Adding " + file_to_insert + " to Rasdaman as " + coll_name
-        
+      
     # gdal
     inDs = gdal.Open(file_to_insert, GA_ReadOnly)
 
@@ -66,10 +65,14 @@ for item in filecoll:
             sys.exit()
 
     # --- insert image data --
-    command = "rasimport -f %s -t %s -coll %s -conn /home/earthserver/rasconnect>/dev/null" % (file_to_insert, datatype, coll_name)
-    os.system(command)
-    while rasql.checkcoll(coll_name, inDs.RasterXSize, inDs.RasterYSize) != 1:
-        if rasql.checkcoll(coll_name, inDs.RasterXSize, inDs.RasterYSize) == 2:
-            os.system("raserase -coll " + coll_name)       
+    if rasql.inrasdaman(coll_name) == 0:
+        print "Adding " + file_to_insert + " to rasdaman as " + coll_name
+        command = "rasimport -f %s -t %s -coll %s -conn /home/earthserver/rasconnect>/dev/null" % (file_to_insert, datatype, coll_name)
         os.system(command)
+        while rasql.checkcoll(coll_name, inDs.RasterXSize, inDs.RasterYSize) != 1:
+            if rasql.checkcoll(coll_name, inDs.RasterXSize, inDs.RasterYSize) == 2:
+                os.system("raserase -coll " + coll_name)       
+            os.system(command)
+    else:
+        print "Skipping %s. Collection already exists!" % (coll_name)
 

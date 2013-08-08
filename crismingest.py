@@ -16,18 +16,19 @@ datafolder = ini("crismingest.ini")["datafolder"]
 crs = ini("crismingest.ini")["crs"]
 listfile = os.path.join(datafolder,name,name + "list.txt")
 
-if sys.argv[1] == "-create":
-    command = 'python createcrismlist.py %s' % (listfile)
+try:
+    if sys.argv[1] == "-create":
+        command = 'python createcrismlist.py %s' % (listfile)
+        os.system(command)
+
+        command = 'python createcrismstats.py %s' % (listfile)
+        os.system(command)
+except:
+    # command = 'python rasimporter.py -l %s' % (listfile)
+    # os.system(command)
+
+    # command = 'python rascrs.py %s %s' % (listfile, crs)
+    # os.system(command)
+
+    command = 'python addcrismmetadata.py %s' % (listfile)
     os.system(command)
-
-    command = 'python createcrismstats.py %s' % (listfile)
-    os.system(command)
-
-command = 'python rasimporter.py -l %s' % (listfile)
-os.system(command)
-
-command = 'python rascrs.py %s %s' % (listfile, crs)
-os.system(command)
-
-command = 'python addcrismmetadata.py %s' % (listfile)
-os.system(command)

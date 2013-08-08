@@ -9,7 +9,7 @@ crismingest.py [-create]
 ```
 
 Misc:
-* Use -create if the list (createcrismlist.py) and JSON metadata (createcrismstats.py) have not been created yet.
+* Use -create first, to make the list (createcrismlist.py) and JSON metadata (createcrismstats.py).
 * The ingestion includes:
   * rasimporter.py
   * rascrs.py
@@ -38,7 +38,7 @@ createcrismstats.py list.txt
 ```
 
 # addcrismmetadata.py
-add CRISM .js JSON metadata to gmlcov:metadata
+add CRISM XML metadata PDS ODE link to gmlcov:metadata
 
 ```
 addcrismmetadata.py list.txt

@@ -15,7 +15,7 @@ def betweenstring(string,a,b):
 gdal.AllRegister()
 
 text = '''
-For each CRISM .img data in listfile create .js (JSON) containing metadata.
+For each CRISM .img data in listfile create .js (JSON) in metadata folder containing metadata. These are used by the PlanetServer webclient.
 
   createcrismstats.py /path/list.txt
 '''
@@ -27,6 +27,10 @@ else:
     filecoll = []
     listfile = sys.argv[1]
 
+outputfolder = os.path.join(os.getcwd(),'metadata')
+if not os.path.exists(outputfolder):
+    os.makedirs(outputfolder)
+    
 f = open(listfile,"r")
 for line in f:
     line = line.strip().split(",")
@@ -57,7 +61,7 @@ for line in f:
         sys.exit()
     
     print "Writing " + collname + ".js"
-    o = open(collname + ".js","w")
+    o = open(os.path.join(outputfolder,collname + ".js"),"w")
     out = "{"
     gdallist = ["minimum","maximum","mean","stddev"]
     for item in gdallist:
