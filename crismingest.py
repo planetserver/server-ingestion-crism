@@ -24,11 +24,14 @@ try:
         command = 'python createcrismstats.py %s' % (listfile)
         os.system(command)
 except:
-    # command = 'python rasimporter.py -l %s' % (listfile)
-    # os.system(command)
+    command = 'python rasimporter.py -l %s' % (listfile)
+    os.system(command)
 
-    # command = 'python rascrs.py %s %s' % (listfile, crs)
-    # os.system(command)
+    command = 'python rascrs.py %s %s' % (listfile, crs)
+    os.system(command)
 
     command = 'python addcrismmetadata.py %s' % (listfile)
+    os.system(command)
+
+    command = 'python ingestlist.py'
     os.system(command)

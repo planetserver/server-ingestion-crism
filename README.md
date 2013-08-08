@@ -1,6 +1,18 @@
 rasdaman_ingestion
 ==================
 
+# crism_pds_update.py
+Check if there is a new release of CRISM data on the PDS ODE. If so download.
+
+# crism_pds_size.py
+Determines for each CRISM dataset its size, saved as .CSV in the pdssizes folder.
+
+# productids_per_region.py
+Using inrasdaman.txt (made by ingestlist.py) and the ROI polygon shapefiles in the regions folder it will create a list of to be added CRISM data, per region, in the regions folder.
+
+# crism_urllist.py
+It uses the .CSV in the pdssizes folder as input (made by crism_pds_size.py). It goes through the .txt files in the regions folder and creates wget -i list files in the download folder.
+
 # crismingest.py
 Run the ingestion of CRISM data according to the information in crismingest.ini
 
