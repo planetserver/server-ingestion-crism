@@ -2,12 +2,16 @@ import os
 import glob
 import arcpy
 
-f = open("inrasdaman.txt","r")
+
 inrasdaman = []
-for line in f:
-    line = line.strip()
-    inrasdaman.append(line[:-5])
-f.close()
+try:
+    f = open("inrasdaman.txt","r")
+    for line in f:
+        line = line.strip()
+        inrasdaman.append(line[:-5])
+    f.close()
+except:
+    "no ingest yet"
 
 arcpy.env.workspace = os.getcwd()
 arcpy.env.overwriteOutput = True
