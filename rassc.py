@@ -39,10 +39,10 @@ if choice == "-l":
         except:
             ""
     for coll in colls:
-        print coll
-        #query = 'select dbinfo(c) from %s in c' % (coll)
-        #size = rasql.out(query)
-        #print size
+        query = 'select dbinfo(c) from %s as c' % (coll)
+        size = rasql.out(query)
+        size = size.split('totalSize": "')[1].split('",')[0]
+        print coll,size
 if choice == "-i":
     collname = sys.argv[2]
     layername = sys.argv[3]

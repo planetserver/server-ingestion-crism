@@ -132,7 +132,7 @@ Misc:
 rasdaman shortcuts
 
 ```
-rassc.py -l = List all collections in RASBASE
+rassc.py -l = List all collections and their sizes
 rassc.py -i = Initialize WMS layer: <collName> <layerName>
 rassc.py -f = Fill pyramids: <collName>
 rassc.py -d = Drop WMS layer: <layerName>
