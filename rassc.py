@@ -42,7 +42,7 @@ if choice == "-l":
         query = 'select dbinfo(c) from %s as c' % (coll)
         size = rasql.out(query)
         size = size.split('totalSize": "')[1].split('",')[0]
-        print coll,size
+        print coll + "," + size
 if choice == "-i":
     collname = sys.argv[2]
     layername = sys.argv[3]

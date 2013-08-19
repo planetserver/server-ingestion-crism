@@ -2,7 +2,7 @@ rasdaman_ingestion
 ==================
 
 # crism_pds_update.py
-Check if there is a new release of CRISM data on the PDS ODE. If so download.
+Check if there is a new release of CRISM data on the PDS ODE. If so download footprint shapefile in /footprints folder.
 
 # crism_pds_size.py
 Determines for each CRISM dataset its size, saved as .CSV in the pdssizes folder.
@@ -142,3 +142,6 @@ rassc.py -c = Compare dataset with collection: <dataset> <collection>
 
 Misc:
 * For petascope WMS see: http://rasdaman.eecs.jacobs-university.de/trac/rasdaman/wiki/WmsImportTools
+
+# ingested_footprints_sf.py
+This python script reads inrasdaman.txt and /footprints/mars_mro_crism_trdr_frthrlhrs07_c0a.shp (downloaded by crism_pds_update.py). It will create a new shapefile with all the CRISM FRT/HRL/HRS data in PlanetServer. The 'PSURL' field is added which contains a URL of the PlanetServer hyperspectral analysis tool for the specific CRISM data. Also a KML file is created in the /footprints folder which only contains the PSURL link.

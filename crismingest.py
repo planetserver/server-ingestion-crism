@@ -11,10 +11,9 @@ def ini(filename):
     inputini.close()
     return dict
 
-name = ini("crismingest.ini")["name"]
 datafolder = ini("crismingest.ini")["datafolder"]
 crs = ini("crismingest.ini")["crs"]
-listfile = os.path.join(datafolder,name,name + "list.txt")
+listfile = os.path.join(datafolder,"crismingest.txt")
 
 try:
     if sys.argv[1] == "-create":
@@ -35,3 +34,4 @@ except:
 
     command = 'python ingestlist.py'
     os.system(command)
+
