@@ -63,6 +63,7 @@ for item in filecoll:
             datatype = "CRISMIRImage:CRISMIRSet"
         else:
             sys.exit()
+    print "Using: " + datatype
 
     # --- insert image data --
     if rasql.inrasdaman(coll_name) == 0:

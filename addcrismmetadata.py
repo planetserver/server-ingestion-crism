@@ -21,7 +21,7 @@ for line in f:
     filename = line[0]
     collname = line[1]
     #meta = open(os.path.join(os.path.dirname, collname + ".js","r").readline().strip()
-    meta = '<PlanetServerPDSMetadata xlink:href=http://oderest.rsl.wustl.edu/mars/?query=product\x26results=m\x26output=XML\x26pdsid=%s xlink:type=simple/>' % (collname[:-5].lower())
+    meta = '''&lt;PlanetServerPDSMetadata xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; xlink:href=&quot;http://oderest.rsl.wustl.edu/mars/?query=product&amp;results=m&amp;output=XML&amp;pdsid=%s&quot; xlink:type=&quot;simple&quot;/&gt;''' % (collname[:-5].lower())
     # delete before add
     psql.do("DELETE FROM ps_metadata WHERE coverage=(SELECT id FROM ps_coverage WHERE name=\x27%s\x27);" % (collname))
     # slice up in pieces
