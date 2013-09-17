@@ -1,8 +1,8 @@
 rasdaman_ingestion
 ==================
 
-# crism_pds_update.py
-Check if there is a new release of CRISM data on the PDS ODE. If so download footprint shapefile in /footprints folder.
+# pdsode_updates.py
+Check if there is a new release of various Mars PDS data on the PDS ODE. If so download footprint shapefile in /footprints folder.
 
 # crism_pds_size.py
 Determines for each CRISM dataset its size, saved as .CSV in the pdssizes folder.

@@ -61,6 +61,8 @@ for item in filecoll:
             datatype = "CRISMVNIRImage:CRISMVNIRSet"
         elif inDs.RasterCount == 438:
             datatype = "CRISMIRImage:CRISMIRSet"
+        elif inDs.RasterCount == 72:
+            datatype = "CRISMMRDRImage:CRISMMRDRSet"
         else:
             sys.exit()
     print "Using: " + datatype

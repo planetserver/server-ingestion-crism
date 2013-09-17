@@ -11,16 +11,17 @@ def ini(filename):
     inputini.close()
     return dict
 
+region = ini("crismingest.ini")["region"]
 datafolder = ini("crismingest.ini")["datafolder"]
 crs = ini("crismingest.ini")["crs"]
-listfile = os.path.join(datafolder,"crismingest.txt")
+listfile = os.path.join(datafolder,region,"crismingest.txt")
 
 try:
     if sys.argv[1] == "-create":
         command = 'python createcrismlist.py %s' % (listfile)
         os.system(command)
 
-        command = 'python createcrismstats.py %s' % (listfile)
+        command = 'python createcrismstats.py %s %s' % (listfile,region)
         os.system(command)
 except:
     command = 'python rasimporter.py -l %s' % (listfile)

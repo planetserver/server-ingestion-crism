@@ -17,7 +17,7 @@ gdal.AllRegister()
 text = '''
 For each CRISM .img data in listfile create .js (JSON) in metadata folder containing metadata. These are used by the PlanetServer webclient.
 
-  createcrismstats.py /path/list.txt
+  createcrismstats.py /path/list.txt <region>
 '''
 
 if len(sys.argv) == 1:
@@ -26,6 +26,10 @@ if len(sys.argv) == 1:
 else:
     filecoll = []
     listfile = sys.argv[1]
+    try:
+        region = sys.argv[2]
+    except:
+        region = ""
 
 outputfolder = os.path.join(os.getcwd(),'metadata')
 if not os.path.exists(outputfolder):
@@ -44,6 +48,15 @@ for line in f:
 
     inDs = gdal.Open(filename, GA_ReadOnly)
     bands = inDs.RasterCount
+    transform = inDs.GetGeoTransform()
+    xres = transform[1]
+    yres = transform[5]
+    xmin = transform[0]
+    ymax = transform[3]
+    width = inDs.RasterXSize
+    height = inDs.RasterYSize
+    xmax = xmin + (xres * width)
+    ymin = ymax - (abs(yres) * height)
 
     xmlfile = filename + ".aux.xml"
     if not os.path.exists(xmlfile):
@@ -62,7 +75,7 @@ for line in f:
     
     print "Writing " + collname + ".js"
     o = open(os.path.join(outputfolder,collname + ".js"),"w")
-    out = "{"
+    out = "{\"region\": \"" + str(region) + "\", \"xmin\": " + str(xmin) + ", \"xmax\": " + str(xmax) + ", \"ymin\": " + str(ymin) + ", \"ymax\": " + str(ymax) + ", \"width\": " + str(width) + ", \"height\": " + str(height) + ", \"bands\": " + str(bands) + ","
     gdallist = ["minimum","maximum","mean","stddev"]
     for item in gdallist:
         i = 0
@@ -84,7 +97,7 @@ for line in f:
             out = out + temp[i] + ","
             i += 1
         out = out[:-1] + "],"
-    out = out[:-1] + "};"
+    out = out[:-1] + "}"
     o.write(out)
     o.close()
 
