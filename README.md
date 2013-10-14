@@ -99,6 +99,17 @@ rasimporter.py -l listfile
   
 Misc:
 * listfile containing lines of 'filename,collname'
+
+# rascheck.py
+Check if rasimport went succesful
+
+```
+rascheck.py filename collname
+rascheck.py -l listfile
+```
+  
+Misc:
+* creates rascheck.lst with data which has to be raserased and again rasimported.
   
 # rascrs.py
 helper Python script for ps_set_crs.sh

@@ -72,10 +72,6 @@ for item in filecoll:
         print "Adding " + file_to_insert + " to rasdaman as " + coll_name
         command = "rasimport -f %s -t %s -coll %s -conn /home/earthserver/rasconnect>/dev/null" % (file_to_insert, datatype, coll_name)
         os.system(command)
-        while rasql.checkcoll(coll_name, inDs.RasterXSize, inDs.RasterYSize) != 1:
-            if rasql.checkcoll(coll_name, inDs.RasterXSize, inDs.RasterYSize) == 2:
-                os.system("raserase -coll " + coll_name)       
-            os.system(command)
     else:
         print "Skipping %s. Collection already exists!" % (coll_name)
 
