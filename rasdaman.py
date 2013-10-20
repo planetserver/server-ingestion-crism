@@ -60,7 +60,7 @@ class RasQL():
                 return 2
         except:
             return 0
-    def inrasdaman(self, coll_name):
+    def inrasdaman(self):
         list = self.out("select r from RAS_COLLECTIONNAMES as r")
         colls = []
         list = list.split('  Result object ')
@@ -71,10 +71,7 @@ class RasQL():
                 colls.append(line.strip()[:-1])
             except:
                 ""
-        if coll_name in colls:
-            return 1
-        else:
-            return 0
+        return colls
 
 class PsQL():
     def __init__(self):

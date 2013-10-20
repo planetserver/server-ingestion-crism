@@ -22,6 +22,7 @@ arcpy.MakeFeatureLayer_management(footprintfile, 'footprints')
 
 for regionfile in glob.glob('regions/*.shp'):
     region = os.path.basename(regionfile)[:-4]
+    print region
     o = open('regions/' + region + '.txt','w')
     arcpy.MakeFeatureLayer_management(regionfile, region)
     arcpy.SelectLayerByAttribute_management(region, 'NEW_SELECTION', '"FID" = 0')

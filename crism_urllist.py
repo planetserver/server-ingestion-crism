@@ -10,7 +10,7 @@ for line in f:
     size = line[1]
     urls.append(url)
     sizes.append(int(size))
-f.close()    
+f.close()
 
 for productidfile in glob.glob('regions/*.txt'):
     f = open(productidfile,"r")

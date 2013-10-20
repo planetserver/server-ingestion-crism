@@ -1,4 +1,4 @@
-import os,sys
+import os,sys,glob
 
 def ini(filename):
     dict = {}
@@ -11,19 +11,14 @@ def ini(filename):
     inputini.close()
     return dict
 
-region = ini("crismingest.ini")["region"]
-datafolder = ini("crismingest.ini")["datafolder"]
-crs = ini("crismingest.ini")["crs"]
-listfile = os.path.join(datafolder,region,"crismingest.txt")
-
 text = '''
 Ingest regions of CRISM data into PlanetServer
 
-  crismingest.py -c: create
-  crismingest.py -i: ingest
-  crismingest.py -f: finalize
+  crismingest.py -c <region>: create
+  crismingest.py -i <region>: ingest
+  crismingest.py -f <region>: finalize
   
-crismingest.py uses crismingest.ini
+crismingest.py uses region in crismingest.ini if <region> is omitted.
 '''
 
 filecoll = []
@@ -32,31 +27,51 @@ if len(sys.argv) == 1:
     sys.exit()
 
 if sys.argv[1] == "-c":
-    command = 'python createcrismlist.py %s' % (listfile)
-    os.system(command)
-
-    command = 'python createcrismstats.py %s %s' % (listfile,region)
-    os.system(command)
+    do = 1
 elif sys.argv[1] == "-i":
-    command = 'python rasimporter.py -l %s' % (listfile)
-    os.system(command)
-    
-    command = 'python rascheck.py -l %s' % (listfile)
-    os.system(command)
-    
-    print "Please perform:"
-    print "raseraser.py rascheck.lst"
-    print "rasimporter.py -l rascheck.lst"
-    
+    do = 2
 elif sys.argv[1] == "-f":
-    command = 'python addcrismmetadata.py %s' % (listfile)
-    os.system(command)
-
-    command = 'python ingestlist.py'
-    os.system(command)
-    
-    command = 'python rascrs.py %s %s' % (listfile, crs)
-    os.system(command)
+    do = 3
 else:
     print text
+    sys.exit()
+
+region = ini("crismingest.ini")["region"]
+if len(sys.argv) == 3:
+    region = sys.argv[2]
+datafolder = ini("crismingest.ini")["datafolder"]
+crs = ini("crismingest.ini")["crs"]
+listfile = os.path.join(datafolder,region,"crismingest.txt")
+
+# Check regions
+regions = []
+for file in glob.glob("regions/*.shp"):
+    file = file[:-4].replace("regions/","")
+    if not file in regions:
+        regions.append(file)
+if region in regions:
+    if do == 1:
+        print "Create"
+        command = 'python createcrismlist.py %s' % (listfile)
+        os.system(command)
+
+        command = 'python createcrismstats.py %s %s' % (listfile,region)
+        os.system(command)
+    elif do == 2:
+        command = 'python rasimporter.py -l %s' % (listfile)
+        os.system(command)
+        
+        command = 'python rascheck.py -l %s' % (listfile)
+        os.system(command)
+    elif do == 3:
+        command = 'python addcrismmetadata.py %s' % (listfile)
+        os.system(command)
+
+        command = 'python ingestlist.py'
+        os.system(command)
+        
+        command = 'python rascrs.py %s %s' % (listfile, crs)
+        os.system(command)
+else:
+    print region + ".shp doesn't exist in regions folder"
     sys.exit()
