@@ -2,7 +2,6 @@ import os
 import glob
 import arcpy
 
-
 inrasdaman = []
 try:
     f = open("inrasdaman.txt","r")
@@ -21,6 +20,7 @@ footprintfile = 'footprints/mars_mro_crism_trdr_frthrlhrs07_c0a.shp'
 arcpy.MakeFeatureLayer_management(footprintfile, 'footprints')
 
 for regionfile in glob.glob('regions/*.shp'):
+    count = 0
     region = os.path.basename(regionfile)[:-4]
     print region
     o = open('regions/' + region + '.txt','w')
@@ -31,5 +31,8 @@ for regionfile in glob.glob('regions/*.shp'):
     for select in selected:
         if not select.ProductId.lower() in inrasdaman:
             o.write('%s\n' % (select.ProductId))
+        else:
+            count += 1
+    print count
     o.close()
 
