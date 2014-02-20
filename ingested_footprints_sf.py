@@ -3,7 +3,7 @@ import json
 import glob
 from shapefile import shapefile
 
-psbaseurl = "http://planetserver.jacobs-university.de/?productid="
+psbaseurl = "http://planetserver.jacobs-university.de/classic/?productid="
 sfin_name = "footprints/mars_mro_crism_trdr_frthrlhrs07_c0a.shp"
 insf = shapefile("read", sfin_name)
 
@@ -37,7 +37,7 @@ for features in featurelist:
     pid = table['ProductId']
     if pid in ingested:
         table['PSURL'] = psbaseurl + pid
-        metadatajs = glob.glob("metadata/" + pid + "*.js")[0]
+        metadatajs = glob.glob("metadata/" + pid.lower() + "*.js")[0]
         f = open(metadatajs,"r")
         j = json.load(f)
         table['XMIN'] = j["xmin"]
