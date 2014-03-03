@@ -68,7 +68,7 @@ for item in filecoll:
             if inDs.RasterCount == 107:
                 datatype = "CRISMVNIRImage:CRISMVNIRSet"
             elif inDs.RasterCount == 438:
-                datatype = "CRISMhhhIRImage:CRISMIRSet"
+                datatype = "CRISMIRImage:CRISMIRSet"
             elif inDs.RasterCount == 72:
                 datatype = "CRISMMRDRImage:CRISMMRDRSet"
             else:
