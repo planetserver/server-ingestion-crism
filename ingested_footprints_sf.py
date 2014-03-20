@@ -38,6 +38,7 @@ for features in featurelist:
     if pid in ingested:
         table['PSURL'] = psbaseurl + pid
         metadatajs = glob.glob("metadata/" + pid.lower() + "*.js")[0]
+        print pid.lower()
         f = open(metadatajs,"r")
         j = json.load(f)
         table['XMIN'] = j["xmin"]

@@ -78,7 +78,7 @@ class PsQL():
         self.wcps_db="petascopedb"
         self.wcps_host="localhost"
         self.wcps_port=5432
-        self.wcps_user="earthserver"
+        self.wcps_user="petauser"
         self.psqllogin = "-d %s --port %s -U %s -h %s" % (self.wcps_db, self.wcps_port, self.wcps_user, self.wcps_host)
         self.writelog("############## " + time.ctime() + " ##############\n")
     def do(self, query):

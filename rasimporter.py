@@ -4,6 +4,7 @@ import os,sys
 import subprocess
 from rasdaman import *
 rasql = RasQL()
+import time
 
 text = '''
 helper Python script for rasimport
@@ -56,10 +57,13 @@ for item in filecoll:
         elif inDs.RasterCount == 1:
             if inDs.GetRasterBand(1).DataType == 1:
                 datatype = "GreyImage:GreySet"
+                crs = 'http://planetserver.jacobs-university.de:8080/def/crs/PS/0/2/'
             elif inDs.GetRasterBand(1).DataType == 3:
                 datatype = "ShortImage:ShortSet"
+                crs = 'http://planetserver.jacobs-university.de:8080/def/crs/PS/0/2/'
             elif inDs.GetRasterBand(1).DataType == 6:
                 datatype = "FloatImage:FloatSet"
+                crs = 'http://planetserver.jacobs-university.de:8080/def/crs/PS/0/2/'
             else:
                 print "Unsupported data type: " + str(inDs.GetRasterBand(1).DataType)
                 print "Please use rasset.py to add data type"
@@ -67,19 +71,28 @@ for item in filecoll:
         else:
             if inDs.RasterCount == 107:
                 datatype = "CRISMVNIRImage:CRISMVNIRSet"
+                crs = 'http://planetserver.jacobs-university.de:8080/def/crs/PS/0/2/'
             elif inDs.RasterCount == 438:
                 datatype = "CRISMIRImage:CRISMIRSet"
+                crs = 'http://planetserver.jacobs-university.de:8080/def/crs/PS/0/2/'
             elif inDs.RasterCount == 72:
                 datatype = "CRISMMRDRImage:CRISMMRDRSet"
+                crs = 'http://planetserver.jacobs-university.de:8080/def/crs/PS/0/2/'
             else:
                 print "Unsupported data type, please use rasset.py to add data type"
                 sys.exit()
         
         print "Using: " + datatype
         print "Adding " + file_to_insert + " to rasdaman as " + coll_name
-        command = "rasimport -f %s -t %s -coll %s -conn /home/earthserver/rasconnect>/dev/null" % (file_to_insert, datatype, coll_name)
-        #output = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True).communicate()[0]
-        os.system(command)
+        command = "/home/earthserver/rc/applications/rasgeo/rasimport -f %s -t %s --coll %s --coverage-name %s --crs-uri %s --conn /home/earthserver/.rasdaman/rasconnect" % (file_to_insert, datatype, coll_name, coll_name, crs)
+        # >/dev/null
+        output = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True).communicate()[0]
+        #os.system(command)
+        print output
+        if "ERROR" in output:
+            break
+        time.sleep(3)
+        
         #if "ERROR - rimport::main, l. 1467: RasManager Error: Write transaction in progress, please retry again later." in output or "ERROR - rimport::main, l. 1467: RasManager Error: System overloaded, please try again later" in output:
         #    print "Please wait a few minutes and start again"
         #    sys.exit()
