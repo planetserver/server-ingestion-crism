@@ -11,6 +11,9 @@ for line in f:
     datasets.append(line)
 f.close()
 
+if not os.path.exists("footprints"):
+    os.makedirs("footprints")
+
 updated = []
 path = os.path.join(os.getcwd(), 'footprints')
 for dataset in datasets:

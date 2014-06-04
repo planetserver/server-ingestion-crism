@@ -11,6 +11,7 @@ try:
     f.close()
 except:
     "no ingest yet"
+    pass
 
 arcpy.env.workspace = os.getcwd()
 arcpy.env.overwriteOutput = True
@@ -20,7 +21,8 @@ footprintfile = 'footprints/mars_mro_crism_trdr_frthrlhrs07_c0a.shp'
 arcpy.MakeFeatureLayer_management(footprintfile, 'footprints')
 
 for regionfile in glob.glob('regions/*.shp'):
-    count = 0
+    count1 = 0
+    count2 = 0
     region = os.path.basename(regionfile)[:-4]
     print region
     o = open('regions/' + region + '.txt','w')
@@ -31,8 +33,10 @@ for regionfile in glob.glob('regions/*.shp'):
     for select in selected:
         if not select.ProductId.lower() in inrasdaman:
             o.write('%s\n' % (select.ProductId))
+            count2 += 1
         else:
-            count += 1
-    print count
+            count1 += 1
+    print "  already in rasdaman: " + str(count1)
+    print "  new data: " + str(count2)
     o.close()
 

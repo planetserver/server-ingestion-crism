@@ -71,13 +71,11 @@ for item in filecoll:
             g.write("%s,%s\n" % (file_to_insert, coll_name))
 
 if ingest == 1:
-    print "Written rascheck_ingest.lst"
-    print "Please perform:"
-    print "  rasimporter.py -l rascheck_ingest.lst"
+    print "Something went wrong, please perform:"
+    print "  python rasimporter.py -l rascheck_ingest.lst"
     f.close()
 if reingest == 1:
-    print "Written rascheck_reingest.lst"
-    print "Please perform:"
-    print "  raseraser.py rascheck_reingest.lst"
-    print "  rasimporter.py -l rascheck_reingest.lst"
+    print "Something went wrong, please perform:"
+    print "  python raseraser.py rascheck_reingest.lst"
+    print "  python rasimporter.py -l rascheck_reingest.lst"
     g.close()

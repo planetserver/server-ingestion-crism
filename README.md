@@ -6,6 +6,7 @@ Check if there is a new release of various Mars PDS data on the PDS ODE. If so d
 
 # crism_pds_size.py
 Determines for each CRISM dataset its size, saved as .CSV in the pdssizes folder.
+Needs beautifulsoup (http://www.crummy.com/software/BeautifulSoup/)
 
 # productids_per_region.py
 Using inrasdaman.txt (made by ingestlist.py) and the ROI polygon shapefiles in the regions folder it will create a list of to be added CRISM data, per region, in the regions folder.
@@ -14,10 +15,12 @@ Using inrasdaman.txt (made by ingestlist.py) and the ROI polygon shapefiles in t
 It uses the .CSV in the pdssizes folder as input (made by crism_pds_size.py). It goes through the .txt files in the regions folder and creates wget -i list files in the download folder.
 
 # crismingest.py
-Run the ingestion of CRISM data according to the information in crismingest.ini
+Ingest regions of CRISM data into PlanetServer.
 
 ```
-crismingest.py [-create]
+  crismingest.py -c: create
+  crismingest.py -i: ingest
+  crismingest.py -f: finalize
 ```
 
 Misc:

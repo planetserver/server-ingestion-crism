@@ -4,6 +4,9 @@ import os, sys
 class Opener(FancyURLopener):
     version = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11'
 
+if not os.path.exists("pdssizes"):
+    os.makedirs("pdssizes")
+
 out = open("pdssizes/crism_frthrshrl07_size.csv","w")
 out.write("URL,SIZE\n")
 

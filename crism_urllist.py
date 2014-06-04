@@ -1,5 +1,8 @@
 import os, sys, glob
 
+if not os.path.exists("download"):
+    os.makedirs("download")
+
 sizes = []
 urls = []
 f = open("pdssizes/crism_frthrshrl07_size.csv","r")
