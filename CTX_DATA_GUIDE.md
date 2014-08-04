@@ -164,68 +164,74 @@ This is a bit of trial and error. If you choose nr=2 then you will get a split o
   ```
   gdaltindex -write_absolute_path <name>.shp *tiled.tif
   ``` 
-5. Make a .map file for MapServer. Here is an example:  
-    ```
-    \#
-    \# Start of map file 
-    \# 
-    MAP 
-        NAME "noachis"    
-        STATUS ON  
-        SIZE 500 500  
-        # EXTENT # commented out, as it will be calculated on-the-fly 
-        UNITS METERS # Use UNITS DD if the PROJECTION is a geographic CRS 
-        SHAPEPATH "data"  
-        #CONFIG "MS_ERRORFILE" "/home/earthserver/ms_temp/ms_error.txt" 
-        IMAGETYPE PNG 
-        \# 
-        PROJECTION  
-           "+proj=eqc"  
-           "+lat_ts=0"  
-           "+lat_0=0" 
-           "+lon_0=0" 
-           "+x_0=0" 
-           "+y_0=0" 
-           "+a=3396190" 
-           "+b=3396190" 
-           "+units=m" 
-           "+no_defs" 
-        END 
+5. Make a .map file for MapServer. Here is an example:    
+      ```
       #
-      # Start of web interface definition (including WMS enabling metadata) 
-      # 
-      WEB 
-        # change the next two lines to match your setup 
-        IMAGEPATH "/home/piero/Downloads/ms4w/tmp/ms_tmp/"  
-        IMAGEURL "/ms_tmp/" 
-        METADATA  
-          "wms_title"           "PlanetServer WMS"  
-          "wms_onlineresource"  "http://planetserver.jacobs-university.de/cgi-bin/mapserv?map=noachis.map&" 
-          "wms_srs"             "EPSG:4269 EPSG:4326" 
-          "wms_enable_request" "*"  
-        END 
-      END 
-      # 
-      # Start of layer definitions  
-      # 
-      LAYER 
-        NAME "noachis"  
-        TYPE RASTER 
-        STATUS ON 
-        TILEINDEX "/var/lib/pgsql/process_data/wms/noachis/noachis.shp" 
-        TILEITEM "location" 
-        # Color mapping 
-        PROCESSING "SCALE=0,255"  
-        PROCESSING "SCALE_BUCKETS=256"  
-      END #layer  
-    OUTPUTFORMAT  
-      NAME "png"  
-      DRIVER AGG/PNG  
-      MIMETYPE "image/png"  
-      IMAGEMODE RGB 
-      EXTENSION "png" 
-      FORMATOPTION "GAMMA=0.75" 
-      TRANSPARENT ON  
-    END 
-    END #map  
-    ```
+      # Start of map file
+      #
+      MAP
+      
+        NAME "noachis"    
+        STATUS ON   
+        SIZE 500 500    
+        # EXTENT # commented out, as it will be calculated on-the-fly   
+        UNITS METERS # Use UNITS DD if the PROJECTION is a geographic CRS   
+        SHAPEPATH "data"    
+        #CONFIG "MS_ERRORFILE" "/home/earthserver/ms_temp/ms_error.txt"   
+        IMAGETYPE PNG      
+        #   
+        PROJECTION
+        
+          "+proj=eqc"   
+          "+lat_ts=0"   
+          "+lat_0=0"    
+          "+lon_0=0"    
+          "+x_0=0"    
+          "+y_0=0"    
+          "+a=3396190"    
+          "+b=3396190"    
+          "+units=m"    
+          "+no_defs"    
+        END   
+  
+  #   
+  # Start of web interface definition (including WMS enabling metadata)   
+  #   
+  WEB   
+  
+    # change the next two lines to match your setup   
+    IMAGEPATH "/home/piero/Downloads/ms4w/tmp/ms_tmp/"    
+    IMAGEURL "/ms_tmp/"   
+    METADATA
+    
+      "wms_title"           "PlanetServer WMS"    
+      "wms_onlineresource"  "http://planetserver.jacobs-university.de/cgi-bin/mapserv?map=noachis.map&"   
+      "wms_srs"             "EPSG:4269 EPSG:4326"   
+      "wms_enable_request" "*"    
+    END   
+  END      
+  #   
+  # Start of layer definitions    
+  #   
+  LAYER   
+  
+    NAME "noachis"    
+    TYPE RASTER   
+    STATUS ON   
+    TILEINDEX "/var/lib/pgsql/process_data/wms/noachis/noachis.shp"   
+    TILEITEM "location"   
+    # Color mapping   
+    PROCESSING "SCALE=0,255"    
+    PROCESSING "SCALE_BUCKETS=256"    
+  END #layer    
+  OUTPUTFORMAT    
+  NAME "png"    
+  DRIVER AGG/PNG        
+  MIMETYPE "image/png"    
+  IMAGEMODE RGB   
+  EXTENSION "png"   
+  FORMATOPTION "GAMMA=0.75"   
+  TRANSPARENT ON    
+  END   
+  END #map    
+      ```
