@@ -166,19 +166,19 @@ This is a bit of trial and error. If you choose nr=2 then you will get a split o
   ``` 
 5. Make a .map file for MapServer. Here is an example:  
     ```
-    #
-    # Start of map file 
-    # 
+    \#
+    \# Start of map file 
+    \# 
     MAP 
-        NAME "noachis"  
-        STATUS ON 
+        NAME "noachis"    
+        STATUS ON  
         SIZE 500 500  
         # EXTENT # commented out, as it will be calculated on-the-fly 
         UNITS METERS # Use UNITS DD if the PROJECTION is a geographic CRS 
         SHAPEPATH "data"  
         #CONFIG "MS_ERRORFILE" "/home/earthserver/ms_temp/ms_error.txt" 
         IMAGETYPE PNG 
-        # 
+        \# 
         PROJECTION  
            "+proj=eqc"  
            "+lat_ts=0"  
