@@ -17,7 +17,7 @@ arcpy.env.workspace = os.getcwd()
 arcpy.env.overwriteOutput = True
 selection_type = 'intersect'
 
-footprintfile = 'footprints/mars_mro_crism_trdr_frthrlhrs07_c0a.shp'
+footprintfile = 'footprints/mars_mro_crism_trdrddrfrt07_c0a.shp'
 arcpy.MakeFeatureLayer_management(footprintfile, 'footprints')
 
 for regionfile in glob.glob('regions/*.shp'):

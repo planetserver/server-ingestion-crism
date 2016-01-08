@@ -1,32 +1,35 @@
 import os, sys, glob
-from shapefile import shapefile
 
 if not os.path.exists("download"):
     os.makedirs("download")
 
-footprintfile = 'footprints/mars_mro_crism_trdrddrfrt07_c0a.shp'
-shp = shapefile("read", footprintfile)
+sizes = []
 urls = []
-for feat in shp.features:
-    attr_dict = shp.attr_dict(feat)
-    LabelURL = attr_dict["LabelURL"]
-    LabelURL = LabelURL.strip()
-    LabelURL = LabelURL.replace(".lbl", ".img")
-    urls.append(LabelURL)
-shp.finish()
+f = open("pdssizes/crism_frthrshrl07_size.csv","r")
+f.readline()
+for line in f:
+    line = line.strip().split(",")
+    url = line[0]
+    size = line[1]
+    urls.append(url)
+    sizes.append(int(size))
+f.close()
 
 for productidfile in glob.glob('regions/*.txt'):
     f = open(productidfile,"r")
-    wgetdownloadlist = 'download/' + os.path.basename(productidfile)[:-4] + '_urllist.txt'
-    o = open(wgetdownloadlist,'w')
+    o = open('download/' + os.path.basename(productidfile)[:-4] + '_urllist.txt','w')
+    sizecnt = 0
     for productid in f:
         productid = productid.strip().lower()[:17]
         if "_if" in productid:
+            i = 0
             for url in urls:
                 ddrid = productid[:-2] + "de"
                 if productid in url or ddrid in url:
                     o.write("%s\n" % (url))
                     o.write("%s\n" % (url[:-4] + ".lbl"))
+                    sizecnt += sizes[i]
+                i += 1
     f.close()
     o.close()
-    print "Written:", wgetdownloadlist
+    print "%s download size: %s GB" % (productidfile[:-4], sizecnt / (1024**3))

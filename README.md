@@ -1,20 +1,20 @@
 rasdaman_ingestion
 ==================
 
-# pdsode_updates.py
+# 1. pdsode_updates.py
 Check if there is a new release of various Mars PDS data on the PDS ODE. If so download footprint shapefile in /footprints folder.
 
-# crism_pds_size.py
-Determines for each CRISM dataset its size, saved as .CSV in the pdssizes folder.
-Needs beautifulsoup (http://www.crummy.com/software/BeautifulSoup/)
-
-# productids_per_region.py
+# 2. productids_per_region.py (using arcpy)
 Using inrasdaman.txt (made by ingestlist.py) and the ROI polygon shapefiles in the regions folder it will create a list of to be added CRISM data, per region, in the regions folder.
 
-# crism_urllist.py
-It uses the .CSV in the pdssizes folder as input (made by crism_pds_size.py). It goes through the .txt files in the regions folder and creates wget -i list files in the download folder.
+# 3. crism_urllist.py / crism_urllist_size.py
+crism_urllist.py uses the LabelURL field in the CRISM TRDR footprint shapefile and goes through the .txt files in the regions folder to create wget -i list files in the download folder.
 
-# crismingest.py
+crism_urllist_size.py on the other hand uses the .CSV in the pdssizes folder as input (made by crism_pds_size.py). 
+
+# 4. Use wget to download
+
+# 5. crismingest.py
 Ingest regions of CRISM data into PlanetServer.
 
 ```
@@ -63,7 +63,7 @@ addcrismmetadata.py list.txt
 create inrasdaman.js with all the collection names ingested in rasdaman. This .js is used by the PlanetServer client.
 
 ```
-ingestlist inrasdaman.js
+ingestlist.py
 ```
 
 # rasdaman.py
@@ -78,9 +78,9 @@ psql = PsQL()
 rasdaman definitions helper Python script
 
 ```
-rasset.py -make filename setname [null=1]
-rasset.py -[add/update] name.def
-rasset.py -del name.def
+rasset.py -make raster_filename setname [null=1]
+rasset.py -[add/update] setname.def
+rasset.py -del setname.def
 ```
 
 Misc:
@@ -113,24 +113,6 @@ rascheck.py -l listfile
   
 Misc:
 * creates rascheck.lst with data which has to be raserased and again rasimported.
-  
-# rascrs.py
-helper Python script for ps_set_crs.sh
-
-```
-rascrs.py listfile CRSURL
-```
-
-Misc:
-* listfile containing lines of 'filename,collname'
-* CRSURL like http://kahlua.eecs.jacobs-university.de:8080/def/crs/PS/0/1/
-  
-It uses an altered version of: http://www.earthserver.eu/svn/earthserver/src/ps_set_crs.sh
-```
-line 33: add correct rasconnect path
-lines 104-106: comment out
-line 107: add ANS='y'
-```
 
 # raseraser.py
 helper Python script for raserase
@@ -159,3 +141,7 @@ Misc:
 
 # ingested_footprints_sf.py
 This python script reads inrasdaman.txt and /footprints/mars_mro_crism_trdr_frthrlhrs07_c0a.shp (downloaded by crism_pds_update.py). It will create a new shapefile with all the CRISM FRT/HRL/HRS data in PlanetServer. The 'PSURL' field is added which contains a URL of the PlanetServer hyperspectral analysis tool for the specific CRISM data. Also a KML file is created in the /footprints folder which only contains the PSURL link.
+
+# crism_pds_size.py
+Determines for each CRISM dataset its size, saved as .CSV in the pdssizes folder.
+Needs beautifulsoup (http://www.crummy.com/software/BeautifulSoup/)
